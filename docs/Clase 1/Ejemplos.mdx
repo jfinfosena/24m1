@@ -1,0 +1,139 @@
+---
+sidebar_position: 3
+title: 'Ejemplos'
+draft: true
+---
+
+
+## Ejemplos Arduino con Sintaxis Básica de cpp
+
+Aquí te presento ejemplos para Arduino que ilustran la sintaxis básica de cpp que hemos visto:
+
+**1. Control de un LED con un Botón:**
+
+```cpp
+int ledPin = 13; // Define el pin del LED
+int buttonPin = 2; // Define el pin del botón
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // Configura el pin del LED como salida
+  pinMode(buttonPin, INPUT); // Configura el pin del botón como entrada
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin); // Lee el estado del botón
+
+  if (buttonState == HIGH) { // Si el botón está presionado
+    digitalWrite(ledPin, HIGH); // Enciende el LED
+  } else { // Si el botón no está presionado
+    digitalWrite(ledPin, LOW); // Apaga el LED
+  }
+}
+```
+
+* **Explicación:**
+    * Se declaran las variables `ledPin` y `buttonPin` para almacenar los pines donde se conectan el LED y el botón.
+    * En la función `setup()`, se configuran los pines como salida (LED) y entrada (botón).
+    * En la función `loop()`, se lee el estado del botón con `digitalRead()`.
+    * Se usa una instrucción `if` para controlar el estado del LED. Si el botón está presionado, el LED se enciende; si no, se apaga.
+
+**2. Lectura de un Sensor de Temperatura (LM35):**
+
+```cpp
+int sensorPin = A0; // Define el pin del sensor de temperatura
+float temperatura; // Define la variable para almacenar la temperatura
+
+void setup() {
+  Serial.begin(9600); // Inicializa la comunicación serial
+}
+
+void loop() {
+  int valorSensor = analogRead(sensorPin); // Lee el valor del sensor
+  temperatura = (valorSensor * 5.0) / 1023.0; // Convierte el valor analógico a voltaje
+  Serial.print("Temperatura: ");
+  Serial.println(temperatura); // Imprime la temperatura en la consola serial
+  delay(1000); // Espera 1 segundo
+}
+```
+
+* **Explicación:**
+    * Se declaran las variables `sensorPin` y `temperatura`.
+    * En `setup()`, se inicializa la comunicación serial para ver los datos en la consola.
+    * En `loop()`, se lee el valor analógico del sensor usando `analogRead()`.
+    * Se calcula la temperatura a partir del valor analógico, usando la fórmula para el sensor LM35.
+    * Se imprime la temperatura en la consola serial.
+
+**3. Conteo con un Botón y un LED:**
+
+```cpp
+int ledPin = 13; // Define el pin del LED
+int buttonPin = 2; // Define el pin del botón
+int contador = 0; // Define la variable para el contador
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // Configura el pin del LED como salida
+  pinMode(buttonPin, INPUT); // Configura el pin del botón como entrada
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin); // Lee el estado del botón
+  
+  if (buttonState == HIGH) { // Si el botón está presionado
+    contador++; // Incrementa el contador
+    digitalWrite(ledPin, HIGH); // Enciende el LED
+    delay(500); // Espera 500ms
+    digitalWrite(ledPin, LOW); // Apaga el LED
+    delay(500); // Espera 500ms
+    Serial.print("Contador: ");
+    Serial.println(contador); // Imprime el contador
+  }
+}
+```
+
+* **Explicación:**
+    * Se declaran las variables `ledPin`, `buttonPin` y `contador`.
+    * Se configuran los pines del LED y botón.
+    * En `loop()`, se lee el estado del botón.
+    * Si el botón está presionado, se incrementa el contador, se enciende el LED por un tiempo y se imprime el contador en la consola serial.
+
+**4. Función para Encender/Apagar el LED:**
+
+```cpp
+int ledPin = 13; // Define el pin del LED
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // Configura el pin del LED como salida
+}
+
+void loop() {
+  encenderLed(); // Llama a la función para encender el LED
+  delay(1000); // Espera 1 segundo
+  apagarLed(); // Llama a la función para apagar el LED
+  delay(1000); // Espera 1 segundo
+}
+
+void encenderLed() {
+  digitalWrite(ledPin, HIGH); // Enciende el LED
+}
+
+void apagarLed() {
+  digitalWrite(ledPin, LOW); // Apaga el LED
+}
+```
+
+* **Explicación:**
+    * Se definen las funciones `encenderLed()` y `apagarLed()` para controlar el estado del LED.
+    * En `loop()`, se llaman a las funciones para encender y apagar el LED de forma alterna.
+
+**Recuerda:** Estos ejemplos son simples, pero te muestran cómo aplicar los conceptos de sintaxis básica de cpp en Arduino. La clave es practicar con ejemplos específicos, adaptarlos a tus proyectos y explorar las diferentes posibilidades de la plataforma Arduino. 
+
+
+
+
+<iframe
+  id="inlineFrameExample"
+  title="Inline Frame Example"
+  width="100%"
+  height="500"
+  src="https://www.tinkercad.com/things/9qiP5RSIOXD-amazing-jaban-krunk?sharecode=6OFEWmzWTmEN8c6ds0AgVg5Eop91wCXnmakZy78Por4">
+</iframe>
