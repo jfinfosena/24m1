@@ -3,45 +3,290 @@ sidebar_position: 1
 draft: false
 ---
 
-# Introducción
 
-## ¿Qué es Arduino?
+# Arduino UNO
 
-Arduino es una plataforma de hardware y software de código abierto que facilita la creación de proyectos electrónicos interactivos. Se compone de dos elementos principales:
+![img](https://store.arduino.cc/cdn/shop/files/A000066_03.front_804x603.jpg?v=1727098250)
 
-### **1. Hardware:**
+## Conceptos Básicos de Arduino y Código
+
+**1. Arduino IDE (Entorno de desarrollo integrado):**
+
+* **¿Qué es?** El Arduino IDE es una herramienta gratuita que se utiliza para escribir, compilar y cargar código en tu placa Arduino.
+* **Características:**
+    * Editor de texto para escribir el código.
+    * Compilador para traducir el código a un lenguaje que la placa Arduino pueda entender.
+    * Cargador para enviar el código compilado a la placa.
+    * Verificador de errores para identificar problemas en el código.
+* **Ejemplo:**
+
+```cpp
+void setup() {
+  // Código que se ejecuta una vez al inicio
+  Serial.begin(9600); // Iniciar la comunicación serial
+}
+
+void loop() {
+  // Código que se ejecuta repetidamente
+  Serial.println("Hola mundo!"); // Imprime "Hola mundo!" en el monitor serial
+  delay(1000); // Espera 1 segundo
+}
+```
+
+**2. Pines de E/S (Entrada/Salida):**
+
+* **¿Qué son?** Los pines de E/S permiten a la placa Arduino comunicarse con el mundo exterior.
+* **Tipos:**
+    * **Digitales:** Pueden estar en estado alto (5V) o bajo (0V). Se pueden usar para controlar luces, motores, sensores, etc.
+    * **Analógicos:** Pueden leer valores continuos, como la temperatura o la luz.
+* **Ejemplo:**
+
+```cpp
+const int ledPin = 13; // Define el pin digital 13 como salida
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // Configura el pin como salida
+}
+
+void loop() {
+  digitalWrite(ledPin, HIGH); // Enciende el LED
+  delay(1000); // Espera 1 segundo
+  digitalWrite(ledPin, LOW); // Apaga el LED
+  delay(1000); // Espera 1 segundo
+}
+```
+
+**3. Comunicación Serial:**
+
+* **¿Qué es?** La comunicación serial permite a la placa Arduino enviar y recibir datos con una computadora o con otros dispositivos.
+* **Características:**
+    * Usa un único cable para transmitir datos.
+    * Se utiliza un protocolo de comunicación para garantizar que los datos se envíen y reciban correctamente.
+* **Ejemplo:**
+
+```cpp
+void setup() {
+  Serial.begin(9600); // Iniciar la comunicación serial
+}
+
+void loop() {
+  if (Serial.available() > 0) { // Verifica si hay datos disponibles
+    int valor = Serial.read(); // Lee el dato
+    Serial.print("Dato recibido: ");
+    Serial.println(valor); // Imprime el dato en el monitor serial
+  }
+}
+```
+
+**4. Funciones Básicas:**
+
+* **`setup()`:** Se ejecuta una vez al inicio del programa.
+* **`loop()`:** Se ejecuta repetidamente después de `setup()`.
+* **`pinMode()`:** Configura un pin como entrada o salida.
+* **`digitalWrite()`:** Escribe un valor alto o bajo a un pin digital.
+* **`digitalRead()`:** Lee el estado de un pin digital.
+* **`analogRead()`:** Lee el valor analógico de un pin.
+* **`analogWrite()`:** Escribe un valor analógico a un pin PWM.
+* **`delay()`:** Pausa la ejecución del programa por un tiempo determinado.
+
+**5. Librerías:**
+
+* **¿Qué son?** Las librerías son conjuntos de funciones y clases predefinidas que se pueden usar para realizar tareas específicas.
+* **Ejemplo:**
+
+```cpp
+#include <Servo.h> // Incluye la librería Servo
+
+Servo servo; // Crea un objeto Servo
+
+const int servoPin = 9; // Define el pin 9 como la salida del servo
+
+void setup() {
+  servo.attach(servoPin); // Asocia el objeto Servo al pin 9
+}
+
+void loop() {
+  for (int i = 0; i <= 180; i++) { // Gira el servo de 0 a 180 grados
+    servo.write(i);
+    delay(15);
+  }
+  for (int i = 180; i >= 0; i--) { // Gira el servo de 180 a 0 grados
+    servo.write(i);
+    delay(15);
+  }
+}
+```
+
+## Especificaciones Técnicas Principales
+
+### Microcontrolador
+- **Chip**: ATmega328P
+- **Arquitectura**: AVR de 8 bits
+- **Frecuencia de reloj**: 16 MHz
+- **Memoria Flash**: 32 KB (0.5 KB usados por el bootloader)
+- **SRAM**: 2 KB
+- **EEPROM**: 1 KB
+
+### Alimentación
+- **Voltaje de operación**: 5V
+- **Voltaje de entrada (recomendado)**: 7-12V
+- **Voltaje de entrada (límites)**: 6-20V
+- **Corriente DC por pin I/O**: 20 mA
+- **Corriente DC para pin 3.3V**: 50 mA
+
+## Pines y Puertos
+
+### Pines Digitales
+- **Cantidad**: 14 pines digitales (D0-D13)
+  - 6 pueden usar PWM (D3, D5, D6, D9, D10, D11)
+- **Características**:
+  - Voltaje de operación: 5V
+  - Corriente máxima: 20mA
+  - Resistencias pull-up internas: 20-50kΩ
+
+### Pines Analógicos
+- **Cantidad**: 6 pines (A0-A5)
+- **Resolución**: 10 bits (1024 valores diferentes)
+- **Rango de medición**: 0-5V
+- **Velocidad de muestreo máxima**: ~10000 muestras por segundo
+
+### Pines Especiales
+- **Serial**: D0 (RX) y D1 (TX)
+- **External Interrupts**: D2 y D3
+- **SPI**: D10 (SS), D11 (MOSI), D12 (MISO), D13 (SCK)
+- **I2C**: A4 (SDA) y A5 (SCL)
+- **LED integrado**: Pin 13
+
+## Interfaces y Comunicación
+
+### USB
+- **Chip**: ATmega16U2
+- **Velocidad**: 115200 baudios por defecto
+- **Funciones**: 
+  - Programación
+  - Comunicación serial
+  - Alimentación (5V)
+
+### ICSP (In-Circuit Serial Programming)
+- 6 pines para programación directa del microcontrolador
+- Usado principalmente para actualizar el bootloader
+
+### Comunicaciones Soportadas
+1. **Serial (UART)**
+   - Pines D0 (RX) y D1 (TX)
+   - Velocidad configurable hasta 115200 baud
+
+2. **I2C**
+   - Pines A4 (SDA) y A5 (SCL)
+   - Comunicación con múltiples dispositivos
+
+3. **SPI**
+   - Pines D10-D13
+   - Comunicación rápida con periféricos
+
+## Protecciones y Características de Seguridad
+
+### Protección USB
+- Fusible reseteable de 500mA
+- Protección contra cortocircuitos
+
+### Protección de Alimentación
+- Diodo de protección contra polaridad inversa
+- Regulador de voltaje con protección térmica
+
+## Programación
+
+### Bootloader
+- **Tamaño**: 0.5 KB
+- **Función**: Permite programar el Arduino mediante USB
+- **Protocolo**: STK500
+
+### Métodos de Programación
+1. **USB** (método más común)
+   ```cpp
+   void setup() {
+     Serial.begin(9600);  // Inicializa comunicación serial
+   }
+   ```
+
+2. **ICSP** (programación directa)
+   - Requiere programador externo
+   - Útil para actualizar bootloader
+
+## Consideraciones de Diseño
+
+### Limitaciones
+- **Corriente máxima total**: 200mA para pines I/O
+- **Frecuencia PWM**:
+  - Pines 5 y 6: 980 Hz
+  - Otros pines PWM: 490 Hz
+
+### Recomendaciones de Uso
+1. **Alimentación**
+   - Usar fuente estable 7-12V
+   - Evitar fuentes ruidosas
+
+2. **Protección de Pines**
+   - Usar resistencias limitadoras
+   - No exceder 5V en entradas
+   - Proteger contra descargas estáticas
+
+## Ejemplo de Aplicación Completa
+
+```cpp
+// Ejemplo de uso de diferentes características
+const int analogPin = A0;    // Pin analógico
+const int pwmPin = 3;        // Pin PWM
+const int digitalPin = 7;    // Pin digital
+
+void setup() {
+  // Configuración de pines
+  pinMode(pwmPin, OUTPUT);
+  pinMode(digitalPin, OUTPUT);
+  
+  // Iniciar comunicación serial
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Lectura analógica
+  int sensorValue = analogRead(analogPin);
+  
+  // Control PWM basado en lectura
+  int pwmValue = map(sensorValue, 0, 1023, 0, 255);
+  analogWrite(pwmPin, pwmValue);
+  
+  // Salida digital condicionada
+  if(sensorValue > 512) {
+    digitalWrite(digitalPin, HIGH);
+  } else {
+    digitalWrite(digitalPin, LOW);
+  }
+  
+  // Envío de datos por serial
+  Serial.print("Analog: ");
+  Serial.print(sensorValue);
+  Serial.print(" PWM: ");
+  Serial.println(pwmValue);
+  
+  delay(100);
+}
+```
+
+## Diagrama de Pines
+
+![img](https://content.arduino.cc/assets/A000066-pinout.png)
+                  ___________
 
 
-* **Placas Arduino:** Son placas de desarrollo con un microcontrolador, entradas y salidas digitales y analógicas, interfaces de comunicación (como USB, SPI, I2C) y otros componentes esenciales. Existen diferentes modelos, cada uno con características y funcionalidades específicas.
-    * **Arduino Uno:**  Modelo básico y popular, ideal para principiantes.
-    * **Arduino Mega:** Ofrece más pines de E/S y memoria para proyectos más complejos.
-    * **Arduino Nano:** Placa pequeña y versátil, perfecta para proyectos portátiles.
-    * **Arduino Due:**  Utiliza un microcontrolador ARM de mayor potencia.
-    * **Arduino Leonardo:** Ofrece un mayor control sobre el puerto USB.
-* **Componentes adicionales:**  Se complementan con las placas Arduino para crear proyectos más completos.
-    * **Sensores:** Detectan información del entorno (luz, temperatura, movimiento, etc.).
-    * **Actuadores:** Controlan dispositivos (motores, LEDs, relés, etc.).
-    * **Pantallas:** Permiten mostrar información o interactuar con el usuario.
-    * **Módulos de comunicación:** Facilitan la comunicación inalámbrica (Bluetooth, WiFi).
+## Recursos y Enlaces Útiles
+- Documentación oficial de Arduino
+[https://www.arduino.cc/](https://www.arduino.cc/)
+- Tinkercad
+[https://www.tinkercad.com/](https://www.tinkercad.com/)
+- Wokwi
+[https://wokwi.com/](https://wokwi.com/)
+- Proteus
+[https://www.labcenter.com/](https://www.labcenter.com/)
 
-### **2. Software:**
 
-* **Entorno de desarrollo Arduino (IDE):** Se trata de un software de código abierto que se utiliza para escribir, compilar y cargar programas (sketch) a las placas Arduino. Es fácil de usar,  incluye ejemplos predefinidos y facilita la depuración del código.
-
-**Historia y Evolución de Arduino:**
-
-* **2005:** Nacido en el Instituto de Diseño Interactivo de Ivrea (Italia), Arduino se creó como una herramienta para estudiantes de diseño y arte que buscaban crear proyectos interactivos.
-* **2008:**  Se lanza la placa Arduino Diecimila, que se convierte en el estándar de la plataforma.
-* **2010:** Se publica la versión 1.0 del IDE, que se ha convertido en el software de desarrollo más utilizado.
-* **2012:** Se lanza la placa Arduino Uno, con un diseño más actualizado y mejorado.
-* **Actualidad:** La plataforma Arduino ha evolucionado constantemente, incorporando nuevos modelos de placas, funcionalidades y herramientas.
-
-**Ventajas de Usar Arduino:**
-
-* **Fácil de usar:**  Tanto el hardware como el software están diseñados para ser accesibles a personas sin experiencia previa en electrónica.
-* **De código abierto:**  El diseño de hardware y software es libre, permitiendo a los usuarios modificarlos y adaptarlos a sus necesidades.
-* **Gran comunidad:**  Una vasta comunidad global de usuarios comparte recursos, proyectos y ayuda a resolver problemas.
-* **Versatilidad:**  Se puede utilizar para una gran variedad de proyectos, desde simples prototipos hasta aplicaciones más complejas.
-* **Bajo costo:**  Las placas Arduino y los componentes son relativamente económicos, lo que lo convierte en una opción accesible para aficionados y profesionales.
-
-[https://www.tinkercad.com/things/9qiP5RSIOXD-amazing-jaban-krunk?sharecode=6OFEWmzWTmEN8c6ds0AgVg5Eop91wCXnmakZy78Por4](https://www.tinkercad.com/things/9qiP5RSIOXD-amazing-jaban-krunk?sharecode=6OFEWmzWTmEN8c6ds0AgVg5Eop91wCXnmakZy78Por4)

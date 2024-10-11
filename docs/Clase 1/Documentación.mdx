@@ -7,21 +7,21 @@ draft: false
 
 ## Sintaxis Básica para Arduino:
 
-**1. Variables:**
+### 1. Variables:
 
-* **Declaración:** Se declara una variable con su tipo de dato y su nombre, seguido de un punto y coma.
+* Declaración: Se declara una variable con su tipo de dato y su nombre, seguido de un punto y coma.
   ```cpp
   int edad; // Declaración de una variable entera llamada "edad"
   float altura; // Declaración de una variable de punto flotante llamada "altura"
   char inicial; // Declaración de una variable de carácter llamada "inicial"
   bool encendido; // Declaración de una variable booleana llamada "encendido"
   ```
-* **Tipos de Datos:**
-    * **int:** Entero (ej: 10, -5, 0)
-    * **float:** Número decimal (ej: 3.14, -2.5)
-    * **char:** Caracter (ej: 'A', '!', '?')
-    * **bool:** Booleano (Verdadero/Falso) (ej: true, false)
-* **Asignación de Valores:** Se le asigna un valor a una variable con el operador `=`.
+* Tipos de Datos:
+    * int: Entero (ej: 10, -5, 0)
+    * float: Número decimal (ej: 3.14, -2.5)
+    * char: Caracter (ej: 'A', '!', '?')
+    * bool: Booleano (Verdadero/Falso) (ej: true, false)
+* Asignación de Valores: Se le asigna un valor a una variable con el operador `=`.
   ```cpp
   edad = 25; // Asignando el valor 25 a la variable "edad"
   altura = 1.75; // Asignando el valor 1.75 a la variable "altura"
@@ -29,9 +29,9 @@ draft: false
   encendido = true; // Asignando el valor "verdadero" a la variable "encendido"
   ```
 
-**2. Operadores:**
+### 2. Operadores:
 
-* **Aritméticos:**
+* Aritméticos:
     * `+` Suma
     * `-` Resta
     * `*` Multiplicación
@@ -44,7 +44,7 @@ draft: false
   int cociente = 15 / 3; // Divide 15 entre 3, guarda el resultado en "cociente"
   int resto = 17 % 5; // Divide 17 entre 5, guarda el resto en "resto"
   ```
-* **Relacionales:**
+* Relacionales:
     * `==` Igual a
     * `!=` Diferente de
     * `>` Mayor que
@@ -56,7 +56,7 @@ draft: false
   bool esMayor = 10 > 7; // Comprueba si 10 es mayor que 7, guarda el resultado en "esMayor"
   bool esMenor = 3 < 8; // Comprueba si 3 es menor que 8, guarda el resultado en "esMenor"
   ```
-* **Lógicos:**
+* Lógicos:
     * `&&` Y lógico
     * `||` O lógico
     * `!` Negación
@@ -65,7 +65,7 @@ draft: false
   bool esFalso = false || false; // Comprueba si al menos una expresión es verdadera, guarda el resultado en "esFalso"
   bool negacion = !true; // Niega la expresión true, guarda el resultado en "negacion"
   ```
-* **Asignación:**
+* Asignación:
     * `=` Asignación
     * `+=` Suma y asignación (a += b es equivalente a a = a + b)
     * `-=` Resta y asignación
@@ -78,9 +78,9 @@ draft: false
   numero -= 2; // Resta 2 al valor actual de "numero"
   ```
 
-**3. Instrucciones de Control:**
+### 3. Instrucciones de Control:
 
-* **Condicionales (if, else if, else):**
+* Condicionales (if, else if, else):
     * `if` : Ejecuta un bloque de código si una condición es verdadera.
     * `else if` : Ejecuta un bloque de código si la condición anterior es falsa y la actual es verdadera.
     * `else`: Ejecuta un bloque de código si ninguna de las condiciones anteriores es verdadera.
@@ -92,14 +92,14 @@ draft: false
     Serial.println("Eres menor de edad");
   }
   ```
-* **Bucles:**
-    * **for:** Ejecuta un bloque de código un número determinado de veces.
+* Bucles:
+    * for: Ejecuta un bloque de código un número determinado de veces.
       ```cpp
       for (int i = 0; i < 5; i++) {
         Serial.println(i); // Imprime los números del 0 al 4
       }
       ```
-    * **while:** Ejecuta un bloque de código mientras una condición sea verdadera.
+    * while: Ejecuta un bloque de código mientras una condición sea verdadera.
       ```cpp
       int contador = 0;
       while (contador < 10) {
@@ -107,7 +107,7 @@ draft: false
         contador++; // Incrementa el contador en 1
       }
       ```
-    * **do while:** Ejecuta un bloque de código al menos una vez, y luego repetidamente mientras una condición sea verdadera.
+    * do while: Ejecuta un bloque de código al menos una vez, y luego repetidamente mientras una condición sea verdadera.
       ```cpp
       int contador = 0;
       do {
@@ -116,28 +116,28 @@ draft: false
       } while (contador < 10);
       ```
 
-**4. Funciones:**
+### 4. Funciones:
 
-* **Declaración:**
+* Declaración:
   ```cpp
   int suma(int a, int b) {
     return a + b;
   }
   ```
-  * **Nombre:** "suma" (debes elegir un nombre descriptivo)
-  * **Tipo de retorno:** "int" (indica el tipo de dato que devuelve la función)
-  * **Parámetros:** "int a", "int b" (variables que recibe la función)
-  * **Cuerpo de la función:** Código que se ejecuta al llamar a la función.
-  * **Instrucción return:** Devuelve un valor del tipo especificado.
-* **Llamada:**
+  * Nombre: "suma" (debes elegir un nombre descriptivo)
+  * Tipo de retorno: "int" (indica el tipo de dato que devuelve la función)
+  * Parámetros: "int a", "int b" (variables que recibe la función)
+  * Cuerpo de la función: Código que se ejecuta al llamar a la función.
+  * Instrucción return: Devuelve un valor del tipo especificado.
+* Llamada:
   ```cpp
   int resultado = suma(5, 3); // Llama a la función "suma" con los argumentos 5 y 3
   Serial.println(resultado); // Imprime el resultado de la suma (8)
   ```
 
-**Ejemplos en Arduino:**
+Ejemplos en Arduino:
 
-* **Control de un LED con un Botón:**
+* Control de un LED con un Botón:
   ```cpp
   int ledPin = 13; // Define el pin del LED
   int buttonPin = 2; // Define el pin del botón
@@ -157,7 +157,7 @@ draft: false
     }
   }
   ```
-* **Lectura de un Sensor de Temperatura:**
+* Lectura de un Sensor de Temperatura:
   ```cpp
   int sensorPin = A0; // Define el pin del sensor de temperatura
   float temperatura; // Define la variable para almacenar la temperatura
